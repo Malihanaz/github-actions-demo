@@ -1,0 +1,26 @@
+name: My First Workflow
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0'
+
+    - name: Display message
+      run: echo "Hello, this is my first GitHub Actions workflow!"
+
+    - name: Check .NET version
+      run: dotnet --version
