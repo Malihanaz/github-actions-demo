@@ -20,7 +20,7 @@ jobs:
         dotnet-version: '6.0'
 
     - name: Display message
-      run: echo "Hello, this is my first GitHub Actions workflow!"
+      run: echo "Learning GitHub Actions step by step!"
 
     - name: Check .NET version
       run: dotnet --version
