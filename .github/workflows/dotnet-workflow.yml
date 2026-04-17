@@ -1,4 +1,4 @@
-name: My First Workflow
+name: Task Manager API CI
 
 on:
   push:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
+
     - name: Checkout code
       uses: actions/checkout@v3
 
@@ -19,8 +19,17 @@ jobs:
       with:
         dotnet-version: '6.0'
 
-    - name: Display message
-      run: echo "Learning GitHub Actions step by step!"
+    - name: Restore dependencies
+      run: dotnet restore TaskManagerAPI/TaskManagerAPI.csproj
 
-    - name: Check .NET version
-      run: dotnet --version
+    - name: Build project
+      run: dotnet build TaskManagerAPI/TaskManagerAPI.csproj --no-restore
+
+    - name: Publish project
+      run: dotnet publish TaskManagerAPI/TaskManagerAPI.csproj -c Release -o output
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: taskmanager-api-build
+        path: output
